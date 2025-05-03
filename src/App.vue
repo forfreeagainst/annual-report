@@ -39,18 +39,18 @@ const route = useRoute();
 
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import en from 'element-plus/dist/locale/en.mjs';
-import {languages, i18n} from "@/I18n/index.ts";
-import type { langType } from "@/I18n/index.ts";  // ✅ 正确：显式声明仅导入类型
+import { languages, i18n } from '@/I18n/index.ts';
+import type { langType } from '@/I18n/index.ts'; // ✅ 正确：显式声明仅导入类型
 
 // 当前语言
 const langEn = ref(languages[0].value);
 const langLabel = computed(() => {
-  return languages.find(v => v.value === langEn.value)?.label;
-})
+  return languages.find((v) => v.value === langEn.value)?.label;
+});
 const handleLangCommand = (command: langType) => {
   langEn.value = command;
   i18n.global.locale.value = langEn.value as langType;
-}
+};
 // ElementPlus 自带的国际化 注入
 const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
 </script>

@@ -1,12 +1,18 @@
 <template>
-  {{ $t('message.hello') }}
-  <el-table mb-1 :data="[]" />
-  <el-pagination :total="100" />
-  <dd></dd>
+  <MakingFormContainer
+    ref="makingForm"
+    :upload="true"
+    :preview="true"
+    :generate-code="true"
+    :generate-json="true"
+    :clearable="true"
+  >
+    <template slot="action"> </template>
+  </MakingFormContainer>
 </template>
 
 <script lang="ts" setup>
-import dd from '@/components/WidgetForm.vue';
+import MakingFormContainer from '@/components/MakingFormContainer.vue';
 </script>
 
 <style scoped></style>
