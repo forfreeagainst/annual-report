@@ -92,6 +92,12 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
 }
 .fm-container {
   height: calc(100% - 50px);
+  // position: absolute;
+  // top: 50px;
+  // left:0;
+  // right:0;
+  // bottom:0;
+  background-color: pink;
 }
 *,
 :after,

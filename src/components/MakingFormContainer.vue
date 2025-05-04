@@ -99,52 +99,47 @@
               <slot name="action"> </slot>
               <el-button
                 v-if="upload"
-                type="text"
-                size="medium"
+                type="primary"
                 icon="el-icon-upload2"
                 @click="handleUpload"
                 >{{ $t('fm.actions.import') }}</el-button
               >
               <el-button
                 v-if="clearable"
-                type="text"
-                size="medium"
+                type="primary"
                 icon="el-icon-delete"
                 @click="handleClear"
                 >{{ $t('fm.actions.clear') }}</el-button
               >
               <el-button
                 v-if="preview"
-                type="text"
-                size="medium"
+                type="primary"
                 icon="el-icon-view"
                 @click="handlePreview"
                 >{{ $t('fm.actions.preview') }}</el-button
               >
               <el-button
                 v-if="generateJson"
-                type="text"
-                size="medium"
+                type="primary"
                 icon="el-icon-tickets"
                 @click="handleGenerateJson"
                 >{{ $t('fm.actions.json') }}</el-button
               >
               <el-button
                 v-if="generateCode"
-                type="text"
-                size="medium"
+                type="primary"
                 icon="el-icon-document"
                 @click="handleGenerateCode"
                 >{{ $t('fm.actions.code') }}</el-button
               >
             </el-header>
             <el-main :class="{ 'widget-empty': widgetForm.list.length == 0 }">
-              <widget-form
+              <!-- <widget-form
                 v-if="!resetJson"
                 ref="widgetForm"
                 :data="widgetForm"
                 :v-model:select="widgetFormSelect"
-              ></widget-form>
+              ></widget-form> -->
             </el-main>
           </el-container>
 
@@ -167,10 +162,10 @@
                 </div>
               </el-header>
               <el-main class="config-content">
-                <widget-config
+                <!-- <widget-config
                   v-show="configTab == 'widget'"
                   :data="widgetFormSelect"
-                ></widget-config>
+                ></widget-config> -->
                 <form-config v-show="configTab == 'form'" :data="widgetForm.config"></form-config>
               </el-main>
             </el-container>
@@ -276,16 +271,16 @@ import FormConfig from './FormConfig.vue';
 import WidgetForm from './WidgetForm.vue';
 import CusDialog from './CusDialog.vue';
 import GenerateForm from './GenerateForm.vue';
-import Clipboard from 'clipboard';
+// import Clipboard from 'clipboard';
 import {
   basicComponents as basicConfig,
   layoutComponents as layoutConfig,
   advanceComponents as advanceConfig,
 } from './componentsConfig.ts';
 // import request from '../util/request.js';
-import generateCode from './generateCode.ts';
+import generateCodeFn from './generateCode.ts';
 import { useI18n } from 'vue-i18n';
-const { t: $t } = useI18n();
+const { t: $t, locale} = useI18n();
 const props = defineProps({
   preview: {
     type: Boolean,
@@ -403,19 +398,22 @@ const _loadComponents = () => {
   basicComponents.value = basicComponents.value.map((item) => {
     return {
       ...item,
-      name: $t(`fm.components.fields.${item.type}`),
+      name: item.type
+      // name: $t(`fm.components.fields.${item.type}`),
     };
   });
   advanceComponents.value = advanceComponents.value.map((item) => {
     return {
       ...item,
-      name: $t(`fm.components.fields.${item.type}`),
+      name: item.type
+      // name: $t(`fm.components.fields.${item.type}`),
     };
   });
   layoutComponents.value = layoutComponents.value.map((item) => {
     return {
       ...item,
-      name: $t(`fm.components.fields.${item.type}`),
+      name: item.type
+      // name: $t(`fm.components.fields.${item.type}`),
     };
   });
 };
@@ -460,10 +458,10 @@ const handleGenerateJson = () => {
     editor.session.setMode('ace/mode/json');
 
     if (!jsonClipboard.value) {
-      jsonClipboard.value = new Clipboard('.json-btn');
-      jsonClipboard.value.on('success', (e) => {
-        ElMessage.success($t('fm.message.copySuccess'));
-      });
+      // jsonClipboard.value = new Clipboard('.json-btn');
+      // jsonClipboard.value.on('success', (e) => {
+      //   ElMessage.success($t('fm.message.copySuccess'));
+      // });
     }
     jsonCopyValue.value = JSON.stringify(widgetForm.value);
   });
@@ -471,8 +469,8 @@ const handleGenerateJson = () => {
 
 const handleGenerateCode = () => {
   codeVisible.value = true;
-  htmlTemplate.value = generateCode(JSON.stringify(widgetForm.value), 'html');
-  vueTemplate.value = generateCode(JSON.stringify(widgetForm.value), 'vue');
+  htmlTemplate.value = generateCodeFn(JSON.stringify(widgetForm.value), 'html');
+  vueTemplate.value = generateCodeFn(JSON.stringify(widgetForm.value), 'vue');
   nextTick(() => {
     const editor = ace.edit('codeeditor');
     editor.session.setMode('ace/mode/html');
@@ -518,7 +516,7 @@ const getJSON = () => {
   return widgetForm.value;
 };
 const getHtml = () => {
-  return generateCode(JSON.stringify(widgetForm.value));
+  return generateCodeFn(JSON.stringify(widgetForm.value));
 };
 
 const setJSON = (json) => {
@@ -540,7 +538,8 @@ const handleDataChange = (field, value, data) => {
 // }, {
 //   deep: true
 // })
-watch($i18n.locale, (val) => {
+watch(() => locale.value, (val) => {
+  console.log("🚀 ~ watch ~ val:", val)
   _loadComponents();
 });
 

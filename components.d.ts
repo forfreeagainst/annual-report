@@ -8,7 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    copy: typeof import('./src/components/WidgetConfig copy.vue')['default']
     CusDialog: typeof import('./src/components/CusDialog.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
@@ -34,7 +33,6 @@ declare module 'vue' {
     ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
     ElMain: typeof import('element-plus/es')['ElMain']
     ElOption: typeof import('element-plus/es')['ElOption']
-    ElPagination: typeof import('element-plus/es')['ElPagination']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
@@ -43,7 +41,6 @@ declare module 'vue' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSlider: typeof import('element-plus/es')['ElSlider']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
-    ElTable: typeof import('element-plus/es')['ElTable']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
@@ -56,8 +53,6 @@ declare module 'vue' {
     Upload: typeof import('./src/components/Upload/index.vue')['default']
     WidgetConfig: typeof import('./src/components/WidgetConfig.vue')['default']
     WidgetForm: typeof import('./src/components/WidgetForm.vue')['default']
-    WidgetForm222: typeof import('./src/components/WidgetForm222.vue')['default']
-    WidgetForm666: typeof import('./src/components/WidgetForm666.vue')['default']
     WidgetFormItem: typeof import('./src/components/WidgetFormItem.vue')['default']
   }
   export interface ComponentCustomProperties {
