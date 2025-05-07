@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-    <div class="fm-header">
+    <el-header class="fm-header">
       <div class="fm-title">vue3+ElementPlus 代码生成工具</div>
-      <div class="fm-link">
-        <div class="action-item">
-          <!-- <el-button mb-2 @click="toggle">Switch Language</el-button> -->
-          <el-dropdown @command="handleLangCommand">
-            <span class="el-dropdown-link">
-              {{ langLabel }}
-              <el-icon class="el-icon--right">
-                <arrow-down />
-              </el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item v-for="v in languages" :key="v.value" :command="v.value">
-                  {{ v.label }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-        </div>
+      <div class="action-box">
+        <!-- <el-button mb-2 @click="toggle">Switch Language</el-button> -->
+        <el-dropdown @command="handleLangCommand">
+          <span class="el-dropdown-link">
+            {{ langLabel }}
+            <el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item v-for="v in languages" :key="v.value" :command="v.value">
+                {{ v.label }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
-    </div>
+    </el-header>
     <div class="fm-container">
       <el-config-provider :locale="locale">
         <router-view />
@@ -61,12 +59,12 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
   box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);
   padding: 0 10px;
   background-image: linear-gradient(to right, #1278f6, #00b4aa);
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .fm-title {
-    display: inline-block;
     line-height: 50px;
-    vertical-align: middle;
     color: #fff;
     font-size: 20px;
     font-weight: 600;
@@ -74,30 +72,13 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
     margin-left: 6px;
     cursor: pointer;
   }
-  .fm-link {
-    height: 50px;
-    float: right;
-    display: flex;
-    align-items: center;
-  }
-  .action-item {
+  .action-box {
     display: flex;
   }
-}
-.example-showcase .el-dropdown-link {
-  cursor: pointer;
-  color: red;
-  display: flex;
-  align-items: center;
 }
 .fm-container {
   height: calc(100% - 50px);
-  // position: absolute;
-  // top: 50px;
-  // left:0;
-  // right:0;
-  // bottom:0;
-  background-color: pink;
+  // background-color: skyblue;
 }
 *,
 :after,
@@ -106,16 +87,10 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-html,
-body {
-  height: 100%;
-}
 #app {
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  min-height: 100%;
-  height: 100%;
+  height: 100vh;
 }
 </style>

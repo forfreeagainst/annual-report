@@ -7,7 +7,8 @@
     :generate-json="true"
     :clearable="true"
   >
-    <template slot="action"> </template>
+    <template v-slot:action>
+    </template>
   </MakingFormContainer>
 </template>
 
