@@ -1,123 +1,108 @@
 <template>
   <el-container class="main-container">
-    <el-aside width="250px">
+    <el-aside width="250px" class="left-aside">
       <div class="components-list">
         <template v-if="basicFields.length">
           <div class="widget-cate">{{ $t('fm.components.basic.title') }}</div>
-          <draggable
-            tag="ul"
-            :list="basicComponents"
-            v-bind="{
-              group: { name: 'people', pull: 'clone', put: false },
-              sort: false,
-              ghostClass: 'ghost',
-            }"
-            @end="handleMoveEnd"
-            @start="handleMoveStart"
-            :move="handleMove"
-          >
-            <template v-for="(item, index) in basicComponents">
-              <li
-                v-if="basicFields.indexOf(item.type) >= 0"
-                class="form-edit-widget-label"
-                :class="{ 'no-put': item.type == 'divider' }"
-                :key="index"
-              >
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{ item.name }}</span>
-                </a>
-              </li>
-            </template>
-          </draggable>
+            <draggable
+              tag="ul"
+              :list="basicComponents"
+              v-bind="{
+                group: { name: 'people', pull: 'clone', put: false },
+                sort: false,
+                ghostClass: 'ghost',
+              }"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <template v-for="(item, index) in basicComponents">
+                <li
+                  v-if="basicFields.indexOf(item.type) >= 0"
+                  class="form-edit-widget-label"
+                  :class="{ 'no-put': item.type == 'divider' }"
+                  :key="index"
+                >
+                  <a>
+                    <i class="icon iconfont" :class="item.icon"></i>
+                    <span>{{ item.name }}</span>
+                  </a>
+                </li>
+              </template>
+            </draggable>
         </template>
         <template v-if="advanceFields.length">
           <div class="widget-cate">{{ $t('fm.components.advance.title') }}</div>
-          <draggable
-            tag="ul"
-            :list="advanceComponents"
-            v-bind="{
-              group: { name: 'people', pull: 'clone', put: false },
-              sort: false,
-              ghostClass: 'ghost',
-            }"
-            @end="handleMoveEnd"
-            @start="handleMoveStart"
-            :move="handleMove"
-          >
-            <template v-for="(item, index) in advanceComponents">
-              <li
-                v-if="advanceFields.indexOf(item.type) >= 0"
-                class="form-edit-widget-label"
-                :class="{ 'no-put': item.type == 'table' }"
-                :key="index"
-              >
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{ item.name }}</span>
-                </a>
-              </li>
-            </template>
-          </draggable>
+            <draggable
+              tag="ul"
+              :list="advanceComponents"
+              v-bind="{
+                group: { name: 'people', pull: 'clone', put: false },
+                sort: false,
+                ghostClass: 'ghost',
+              }"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <template v-for="(item, index) in advanceComponents">
+                <li
+                  v-if="advanceFields.indexOf(item.type) >= 0"
+                  class="form-edit-widget-label"
+                  :class="{ 'no-put': item.type == 'table' }"
+                  :key="index"
+                >
+                  <a>
+                    <i class="icon iconfont" :class="item.icon"></i>
+                    <span>{{ item.name }}</span>
+                  </a>
+                </li>
+              </template>
+            </draggable>
         </template>
 
         <template v-if="layoutFields.length">
           <div class="widget-cate">{{ $t('fm.components.layout.title') }}</div>
-          <draggable
-            tag="ul"
-            :list="layoutComponents"
-            v-bind="{
-              group: { name: 'people', pull: 'clone', put: false },
-              sort: false,
-              ghostClass: 'ghost',
-            }"
-            @end="handleMoveEnd"
-            @start="handleMoveStart"
-            :move="handleMove"
-          >
-            <template v-for="(item, index) in layoutComponents">
-              <li
-                v-if="layoutFields.indexOf(item.type) >= 0"
-                class="form-edit-widget-label no-put"
-                :key="index"
-              >
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{ item.name }}</span>
-                </a>
-              </li>
-            </template>
-          </draggable>
+            <draggable
+              tag="ul"
+              :list="layoutComponents"
+              v-bind="{
+                group: { name: 'people', pull: 'clone', put: false },
+                sort: false,
+                ghostClass: 'ghost',
+              }"
+              @end="handleMoveEnd"
+              @start="handleMoveStart"
+              :move="handleMove"
+            >
+              <template v-for="(item, index) in layoutComponents">
+                <li
+                  v-if="layoutFields.indexOf(item.type) >= 0"
+                  class="form-edit-widget-label no-put"
+                  :key="index"
+                >
+                  <a>
+                    <i class="icon iconfont" :class="item.icon"></i>
+                    <span>{{ item.name }}</span>
+                  </a>
+                </li>
+              </template>
+            </draggable>
         </template>
       </div>
     </el-aside>
     <el-container class="center-container" direction="vertical">
       <el-header class="btn-bar" style="height: 45px">
         <slot name="action"></slot>
-        <el-button
-          v-if="upload"
-          link
-          type="primary"
-          :icon="Upload"
-          @click="handleUpload"
-          >{{ $t('fm.actions.import') }}</el-button
-        >
-        <el-button
-          v-if="clearable"
-          link
-          type="primary"
-          :icon="Delete"
-          @click="handleClear"
-          >{{ $t('fm.actions.clear') }}</el-button
-        >
-        <el-button
-          v-if="preview"
-          link
-          type="primary"
-          :icon="View"
-          @click="handlePreview"
-          >{{ $t('fm.actions.preview') }}</el-button
-        >
+        <el-button v-if="upload" link type="primary" :icon="Upload" @click="handleUpload">{{
+          $t('fm.actions.import')
+        }}</el-button>
+        <el-button v-if="clearable" link type="primary" :icon="Delete" @click="handleClear">{{
+          $t('fm.actions.clear')
+        }}</el-button>
+        <el-button v-if="preview" link type="primary" :icon="View" @click="handlePreview">{{
+          $t('fm.actions.preview')
+        }}</el-button>
         <el-button
           v-if="generateJson"
           link
@@ -195,15 +180,11 @@
       </generate-form>
 
       <template slot="action">
-        <el-button type="primary" @click="handleTest">{{
-          $t('fm.actions.getData')
-        }}</el-button>
+        <el-button type="primary" @click="handleTest">{{ $t('fm.actions.getData') }}</el-button>
         <el-button @click="formEdit = false" v-if="formEdit">{{
           $t('fm.actions.disabledEdit')
         }}</el-button>
-        <el-button @click="formEdit = true" v-else>{{
-          $t('fm.actions.enabledEdit')
-        }}</el-button>
+        <el-button @click="formEdit = true" v-else>{{ $t('fm.actions.enabledEdit') }}</el-button>
         <el-button @click="handleReset">{{ $t('fm.actions.reset') }}</el-button>
       </template>
     </cus-dialog>
@@ -255,19 +236,11 @@
       </el-tabs>
     </cus-dialog>
   </el-container>
-  <el-footer class="footer-box">
-    Powered by：友情链接
-  </el-footer>
+  <el-footer class="footer-box"> Powered by：友情链接 </el-footer>
 </template>
 
 <script lang="ts" setup>
-import {
-  Upload,
-  Delete,
-  View,
-  Tickets,
-  Document
-} from '@element-plus/icons-vue'
+import { Upload, Delete, View, Tickets, Document } from '@element-plus/icons-vue';
 import { VueDraggableNext as draggable } from 'vue-draggable-next';
 import WidgetConfig from './WidgetConfig.vue';
 import FormConfig from './FormConfig.vue';
@@ -283,7 +256,7 @@ import {
 // import request from '../util/request.js';
 import generateCodeFn from './generateCode.ts';
 import { useI18n } from 'vue-i18n';
-const { t: $t, locale} = useI18n();
+const { t: $t, locale } = useI18n();
 const props = defineProps({
   preview: {
     type: Boolean,
@@ -401,7 +374,7 @@ const _loadComponents = () => {
   basicComponents.value = basicComponents.value.map((item) => {
     return {
       ...item,
-      name: $t(`fm.components.fields.${item.type}`)
+      name: $t(`fm.components.fields.${item.type}`),
     };
   });
   advanceComponents.value = advanceComponents.value.map((item) => {
@@ -421,7 +394,7 @@ const _loadComponents = () => {
   console.log(layoutComponents.value);
 };
 
-const handleConfigSelect = (value:string) => {
+const handleConfigSelect = (value: string) => {
   configTab.value = value;
 };
 const handleMoveEnd = (evt) => {
@@ -483,7 +456,7 @@ const handleGenerateCode = () => {
   });
 };
 const handleUpload = () => {
-  console.log('asdfasd')
+  console.log('asdfasd');
   return;
   uploadVisible.value = true;
   nextTick(() => {
@@ -543,10 +516,13 @@ const handleDataChange = (field, value, data) => {
 // }, {
 //   deep: true
 // })
-watch(() => locale.value, (val) => {
-  console.log("🚀 ~ watch ~ val:", val)
-  _loadComponents();
-});
+watch(
+  () => locale.value,
+  (val) => {
+    console.log('🚀 ~ watch ~ val:', val);
+    _loadComponents();
+  },
+);
 
 onMounted(() => {
   _loadComponents();
@@ -554,64 +530,104 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.footer-box{
+.footer-box {
   font-weight: 600px;
   height: 30px;
   display: flex;
   justify-content: right;
   align-items: center;
-  background-color: #EEE;
+  background-color: #eee;
 }
-.main-container{
+.main-container {
   height: calc(100% - 30px);
   display: flex;
-  border:solid 2px gray;
-  .components-list{
-    padding-left:20px;
-    .widget-cate{
-      padding: 8px 0;
-      font-size: 13px;
-    }
-  }
-  .center-container{
-    border:solid 2px gray;
-    .btn-bar{
-      border:solid 2px gray;
+  border: solid 2px gray;
+  .center-container {
+    border: solid 2px gray;
+    .btn-bar {
+      border: solid 2px gray;
       display: flex;
       justify-content: flex-end;
     }
   }
-  .widget-config-container{
-    border:solid 2px gray;
-    .config-tabs-box{
+  .widget-config-container {
+    border: solid 2px gray;
+    .config-tabs-box {
       display: flex;
       height: 45px;
-      .config-tab{
+      .config-tab {
         display: flex;
-        flex:1;
+        flex: 1;
         justify-content: center;
         align-items: center;
-        border-bottom:solid 2px gray;
+        border-bottom: solid 2px gray;
       }
-      .config-tab.active{
-        border-bottom:solid 2px rgb(121.3,187.1,255);
+      .config-tab.active {
+        border-bottom: solid 2px rgb(121.3, 187.1, 255);
       }
     }
   }
 }
-.form-edit-widget-label{
-  font-size: 12px;
-    display: block;
-    width: 48%;
-    line-height: 26px;
-    position: relative;
-    float: left;
-    left: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 1%;
-    color: #333;
-    border: 1px solid #F4F6FC;
+.left-aside{
+  overflow: hidden;
 }
+.components-list{
+    padding: 8px 0;
+    width: 100%;
+    height: 100%;
+  
+    .widget-cate{
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+  
+    ul{
+      position: relative;
+      overflow: hidden;
+      padding: 0 10px 10px;
+      margin: 0;
+    }
+  
+    .form-edit-widget-label{
+      font-size: 12px;
+      display: block;
+      // width: 48%;
+      width: 47%;
+      line-height: 26px;
+      position: relative;
+      float: left;
+      left: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 1%;
+      color: #333;
+      border: 1px solid #F4F6FC;
+  
+      &:hover{
+        color: skyblue;
+        border: 1px dashed skyblue;
+      }
+  
+      &>a{
+        display: block;
+        cursor: move;
+        background: #F4F6FC;
+        border: 1px solid #F4F6FC;
+  
+        .icon{
+          margin-right: 6px;
+          margin-left: 8px;
+          font-size: 14px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+  
+        span{
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
 </style>
