@@ -83,6 +83,7 @@
                 >
                   <a>
                     <i class="icon iconfont" :class="item.icon"></i>
+                    <!--添加后，才有name-->
                     <span>{{ item.name }}</span>
                   </a>
                 </li>
