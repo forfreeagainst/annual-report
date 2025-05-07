@@ -122,12 +122,12 @@
         >
       </el-header>
       <el-main :class="{ 'widget-empty': widgetForm.list.length == 0 }">
-        <!-- <widget-form
+        <MateriasLayout
           v-if="!resetJson"
-          ref="widgetForm"
+          ref="widgetFormRef"
           :data="widgetForm"
-          :v-model:select="widgetFormSelect"
-        ></widget-form> -->
+          v-model:select="widgetFormSelect"
+        ></MateriasLayout>
       </el-main>
     </el-container>
 
@@ -245,7 +245,7 @@ import { Upload, Delete, View, Tickets, Document } from '@element-plus/icons-vue
 import { VueDraggableNext as draggable } from 'vue-draggable-next';
 import WidgetConfig from './WidgetConfig.vue';
 import FormConfig from './FormConfig.vue';
-import WidgetForm from './WidgetForm.vue';
+import MateriasLayout from './MateriasLayout.vue';
 import CusDialog from './CusDialog.vue';
 import GenerateForm from './GenerateForm.vue';
 // import Clipboard from 'clipboard';

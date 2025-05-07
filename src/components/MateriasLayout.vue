@@ -4,6 +4,7 @@
       {{ $t('fm.description.containerEmpty') }}
     </div>
     <el-form
+      class="form-render-box"
       :size="data.config.size"
       label-suffix=":"
       :label-position="data.config.labelPosition"
@@ -230,11 +231,11 @@ const handlePut = (a, b, c) => {
 
 const emit = defineEmits(['update:select']);
 
-watch(props.select, (val) => {
+watch(() => props.select, (val) => {
   selectWidget.value = val;
 });
 watch(
-  selectWidget,
+  () => selectWidget,
   (val) => {
     emit('update:select', val);
   },
@@ -243,3 +244,11 @@ watch(
   },
 );
 </script>
+
+
+<style lang="scss" scoped>
+// .widget-form-container{
+//   height: 100%;
+//   background-color: pink;
+// }
+</style>

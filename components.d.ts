@@ -48,6 +48,7 @@ declare module 'vue' {
     GenerateForm: typeof import('./src/components/GenerateForm.vue')['default']
     GenerateFormItem: typeof import('./src/components/GenerateFormItem.vue')['default']
     MakingFormContainer: typeof import('./src/components/MakingFormContainer.vue')['default']
+    MateriasLayout: typeof import('./src/components/MateriasLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Upload: typeof import('./src/components/Upload/index.vue')['default']
