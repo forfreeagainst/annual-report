@@ -171,6 +171,7 @@
         domain="xxx"
       >
       </fm-upload>
+      <!-- imgupload -->
     </template>
 
     <template v-if="element.type == 'cascader'">
@@ -203,12 +204,15 @@
     </template>
 
     <div class="widget-view-action" v-if="selectWidget.key == element.key">
-      <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
-      <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
+      <div class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)">copy</div>
+      <div class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)">delete</div>
+      <!-- <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
+      <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i> -->
     </div>
 
     <div class="widget-view-drag" v-if="selectWidget.key == element.key">
-      <i class="iconfont icon-drag drag-widget"></i>
+      <div class="iconfont icon-drag drag-widget">drag</div>
+      <!-- <i class="iconfont icon-drag drag-widget"></i> -->
     </div>
   </el-form-item>
 </template>
@@ -276,11 +280,14 @@ const handleWidgetClone = (index) => {
   });
 };
 const emit = defineEmits(['update:select']);
-watch(props.select, (val) => {
-  selectWidget.value = val;
-});
 watch(
-  selectWidget.value,
+  () => props.select,
+  (val) => {
+    selectWidget.value = val;
+  },
+);
+watch(
+  () => selectWidget.value,
   (val) => {
     emit('update:select', val);
   },
@@ -289,3 +296,17 @@ watch(
   },
 );
 </script>
+
+<style lang="scss" scoped>
+$primary-color: #409eff;
+.widget-view-action {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 28px;
+  line-height: 28px;
+  background: $primary-color;
+  z-index: 9;
+  display: flex;
+}
+</style>

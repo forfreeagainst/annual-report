@@ -17,7 +17,7 @@
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
       >
-        <transition-group name="fade" tag="div" class="widget-form-list">
+        <div class="widget-form-list">
           <template v-for="(element, index) in data.list">
             <template v-if="element.type == 'grid'">
               <el-row
@@ -50,15 +50,15 @@
                   >
                     <transition-group name="fade" tag="div" class="widget-col-list">
                       <template v-for="(el, i) in col.list">
-                        <widget-form-item
+                        <MaterialRender
                           :key="el.key"
                           v-if="el.key"
                           :element="el"
-                          :select.sync="selectWidget"
+                          v-model:select="selectWidget"
                           :index="i"
                           :data="col"
                         >
-                        </widget-form-item>
+                        </MaterialRender>
                       </template>
                     </transition-group>
                   </draggable>
@@ -67,37 +67,43 @@
                   class="widget-view-action widget-col-action"
                   v-if="selectWidget.key == element.key"
                 >
-                  <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
+                  <div class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)">
+                    delete
+                  </div>
+                  <!-- <Operation class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></Operation> -->
+                  <!-- <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i> -->
                 </div>
 
                 <div
                   class="widget-view-drag widget-col-drag"
                   v-if="selectWidget.key == element.key"
                 >
-                  <i class="iconfont icon-drag drag-widget"></i>
+                  <div class="iconfont icon-drag drag-widget">drag</div>
+                  <!-- <i class="iconfont icon-drag drag-widget"></i> -->
                 </div>
               </el-row>
             </template>
             <template v-else>
-              <widget-form-item
+              <MaterialRender
                 v-if="element && element.key"
                 :key="element.key"
                 :element="element"
-                :select.sync="selectWidget"
+                v-model:select="selectWidget"
                 :index="index"
                 :data="data"
-              ></widget-form-item>
+              ></MaterialRender>
             </template>
           </template>
-        </transition-group>
+        </div>
       </draggable>
     </el-form>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { Operation } from '@element-plus/icons-vue';
 import { VueDraggableNext as draggable } from 'vue-draggable-next';
-import WidgetFormItem from './WidgetFormItem.vue';
+import MaterialRender from './MaterialRender.vue';
 const props = defineProps<{
   data: any;
   select: any;
@@ -231,11 +237,14 @@ const handlePut = (a, b, c) => {
 
 const emit = defineEmits(['update:select']);
 
-watch(() => props.select, (val) => {
-  selectWidget.value = val;
-});
 watch(
-  () => selectWidget,
+  () => props.select,
+  (val) => {
+    selectWidget.value = val;
+  },
+);
+watch(
+  () => selectWidget.value,
   (val) => {
     emit('update:select', val);
   },
@@ -245,10 +254,4 @@ watch(
 );
 </script>
 
-
-<style lang="scss" scoped>
-// .widget-form-container{
-//   height: 100%;
-//   background-color: pink;
-// }
-</style>
+<style lang="scss" scoped></style>

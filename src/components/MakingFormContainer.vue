@@ -4,91 +4,91 @@
       <div class="components-list">
         <template v-if="basicFields.length">
           <div class="widget-cate">{{ $t('fm.components.basic.title') }}</div>
-            <draggable
-              tag="ul"
-              :list="basicComponents"
-              v-bind="{
-                group: { name: 'people', pull: 'clone', put: false },
-                sort: false,
-                ghostClass: 'ghost',
-              }"
-              @end="handleMoveEnd"
-              @start="handleMoveStart"
-              :move="handleMove"
-            >
-              <template v-for="(item, index) in basicComponents">
-                <li
-                  v-if="basicFields.indexOf(item.type) >= 0"
-                  class="form-edit-widget-label"
-                  :class="{ 'no-put': item.type == 'divider' }"
-                  :key="index"
-                >
-                  <a>
-                    <i class="icon iconfont" :class="item.icon"></i>
-                    <span>{{ item.name }}</span>
-                  </a>
-                </li>
-              </template>
-            </draggable>
+          <draggable
+            tag="ul"
+            :list="basicComponents"
+            v-bind="{
+              group: { name: 'people', pull: 'clone', put: false },
+              sort: false,
+              ghostClass: 'ghost',
+            }"
+            @end="handleMoveEnd"
+            @start="handleMoveStart"
+            :move="handleMove"
+          >
+            <template v-for="(item, index) in basicComponents">
+              <li
+                v-if="basicFields.indexOf(item.type) >= 0"
+                class="form-edit-widget-label"
+                :class="{ 'no-put': item.type == 'divider' }"
+                :key="index"
+              >
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{ item.name }}</span>
+                </a>
+              </li>
+            </template>
+          </draggable>
         </template>
         <template v-if="advanceFields.length">
           <div class="widget-cate">{{ $t('fm.components.advance.title') }}</div>
-            <draggable
-              tag="ul"
-              :list="advanceComponents"
-              v-bind="{
-                group: { name: 'people', pull: 'clone', put: false },
-                sort: false,
-                ghostClass: 'ghost',
-              }"
-              @end="handleMoveEnd"
-              @start="handleMoveStart"
-              :move="handleMove"
-            >
-              <template v-for="(item, index) in advanceComponents">
-                <li
-                  v-if="advanceFields.indexOf(item.type) >= 0"
-                  class="form-edit-widget-label"
-                  :class="{ 'no-put': item.type == 'table' }"
-                  :key="index"
-                >
-                  <a>
-                    <i class="icon iconfont" :class="item.icon"></i>
-                    <span>{{ item.name }}</span>
-                  </a>
-                </li>
-              </template>
-            </draggable>
+          <draggable
+            tag="ul"
+            :list="advanceComponents"
+            v-bind="{
+              group: { name: 'people', pull: 'clone', put: false },
+              sort: false,
+              ghostClass: 'ghost',
+            }"
+            @end="handleMoveEnd"
+            @start="handleMoveStart"
+            :move="handleMove"
+          >
+            <template v-for="(item, index) in advanceComponents">
+              <li
+                v-if="advanceFields.indexOf(item.type) >= 0"
+                class="form-edit-widget-label"
+                :class="{ 'no-put': item.type == 'table' }"
+                :key="index"
+              >
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <span>{{ item.name }}</span>
+                </a>
+              </li>
+            </template>
+          </draggable>
         </template>
 
         <template v-if="layoutFields.length">
           <div class="widget-cate">{{ $t('fm.components.layout.title') }}</div>
-            <draggable
-              tag="ul"
-              :list="layoutComponents"
-              v-bind="{
-                group: { name: 'people', pull: 'clone', put: false },
-                sort: false,
-                ghostClass: 'ghost',
-              }"
-              @end="handleMoveEnd"
-              @start="handleMoveStart"
-              :move="handleMove"
-            >
-              <template v-for="(item, index) in layoutComponents">
-                <li
-                  v-if="layoutFields.indexOf(item.type) >= 0"
-                  class="form-edit-widget-label no-put"
-                  :key="index"
-                >
-                  <a>
-                    <i class="icon iconfont" :class="item.icon"></i>
-                    <!--添加后，才有name-->
-                    <span>{{ item.name }}</span>
-                  </a>
-                </li>
-              </template>
-            </draggable>
+          <draggable
+            tag="ul"
+            :list="layoutComponents"
+            v-bind="{
+              group: { name: 'people', pull: 'clone', put: false },
+              sort: false,
+              ghostClass: 'ghost',
+            }"
+            @end="handleMoveEnd"
+            @start="handleMoveStart"
+            :move="handleMove"
+          >
+            <template v-for="(item, index) in layoutComponents">
+              <li
+                v-if="layoutFields.indexOf(item.type) >= 0"
+                class="form-edit-widget-label no-put"
+                :key="index"
+              >
+                <a>
+                  <i class="icon iconfont" :class="item.icon"></i>
+                  <!--添加后，才有name-->
+                  <span>{{ item.name }}</span>
+                </a>
+              </li>
+            </template>
+          </draggable>
         </template>
       </div>
     </el-aside>
@@ -122,12 +122,12 @@
         >
       </el-header>
       <el-main :class="{ 'widget-empty': widgetForm.list.length == 0 }">
-        <MateriasLayout
+        <MaterialsLayout
           v-if="!resetJson"
           ref="widgetFormRef"
           :data="widgetForm"
           v-model:select="widgetFormSelect"
-        ></MateriasLayout>
+        ></MaterialsLayout>
       </el-main>
     </el-container>
 
@@ -245,7 +245,7 @@ import { Upload, Delete, View, Tickets, Document } from '@element-plus/icons-vue
 import { VueDraggableNext as draggable } from 'vue-draggable-next';
 import WidgetConfig from './WidgetConfig.vue';
 import FormConfig from './FormConfig.vue';
-import MateriasLayout from './MateriasLayout.vue';
+import MaterialsLayout from './MaterialsLayout.vue';
 import CusDialog from './CusDialog.vue';
 import GenerateForm from './GenerateForm.vue';
 // import Clipboard from 'clipboard';
@@ -569,66 +569,66 @@ onMounted(() => {
     }
   }
 }
-.left-aside{
+.left-aside {
   overflow: hidden;
 }
-.components-list{
-    padding: 8px 0;
-    width: 100%;
-    height: 100%;
-  
-    .widget-cate{
-      padding: 8px 12px;
-      font-size: 13px;
+.components-list {
+  padding: 8px 0;
+  width: 100%;
+  height: 100%;
+
+  .widget-cate {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  ul {
+    position: relative;
+    overflow: hidden;
+    padding: 0 10px 10px;
+    margin: 0;
+  }
+
+  .form-edit-widget-label {
+    font-size: 12px;
+    display: block;
+    // width: 48%;
+    width: 47%;
+    line-height: 26px;
+    position: relative;
+    float: left;
+    left: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 1%;
+    color: #333;
+    border: 1px solid #f4f6fc;
+
+    &:hover {
+      color: skyblue;
+      border: 1px dashed skyblue;
     }
-  
-    ul{
-      position: relative;
-      overflow: hidden;
-      padding: 0 10px 10px;
-      margin: 0;
-    }
-  
-    .form-edit-widget-label{
-      font-size: 12px;
+
+    & > a {
       display: block;
-      // width: 48%;
-      width: 47%;
-      line-height: 26px;
-      position: relative;
-      float: left;
-      left: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      margin: 1%;
-      color: #333;
-      border: 1px solid #F4F6FC;
-  
-      &:hover{
-        color: skyblue;
-        border: 1px dashed skyblue;
+      cursor: move;
+      background: #f4f6fc;
+      border: 1px solid #f4f6fc;
+
+      .icon {
+        margin-right: 6px;
+        margin-left: 8px;
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: middle;
       }
-  
-      &>a{
-        display: block;
-        cursor: move;
-        background: #F4F6FC;
-        border: 1px solid #F4F6FC;
-  
-        .icon{
-          margin-right: 6px;
-          margin-left: 8px;
-          font-size: 14px;
-          display: inline-block;
-          vertical-align: middle;
-        }
-  
-        span{
-          display: inline-block;
-          vertical-align: middle;
-        }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
       }
     }
   }
+}
 </style>
