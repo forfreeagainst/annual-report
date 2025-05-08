@@ -161,7 +161,7 @@
     </template>
 
     <template v-if="element.type == 'imgupload'">
-      <fm-upload
+      <!-- <fm-upload
         v-model="element.options.defaultValue"
         :disabled="element.options.disabled"
         :style="{ width: element.options.width }"
@@ -170,8 +170,8 @@
         token="xxx"
         domain="xxx"
       >
-      </fm-upload>
-      <!-- imgupload -->
+      </fm-upload> -->
+      imgupload
     </template>
 
     <template v-if="element.type == 'cascader'">
@@ -187,8 +187,9 @@
     </template>
 
     <template v-if="element.type == 'editor'">
-      <vue-editor v-model="element.options.defaultValue" :style="{ width: element.options.width }">
-      </vue-editor>
+      <!-- <vue-editor v-model="element.options.defaultValue" :style="{ width: element.options.width }">
+      </vue-editor> -->
+      vue-editor
     </template>
 
     <template v-if="element.type == 'blank'">

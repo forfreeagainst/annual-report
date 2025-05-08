@@ -17,7 +17,7 @@
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
       >
-        <div class="widget-form-list">
+      <transition-group name="fade" tag="div" class="widget-form-list">
           <template v-for="(element, index) in data.list">
             <template v-if="element.type == 'grid'">
               <el-row
@@ -48,7 +48,7 @@
                     @end="handleMoveEnd"
                     @add="handleWidgetColAdd($event, element, colIndex)"
                   >
-                    <transition-group name="fade" tag="div" class="widget-col-list">
+                  <transition-group name="fade" tag="div" class="widget-col-list">
                       <template v-for="(el, i) in col.list">
                         <MaterialRender
                           :key="el.key"
@@ -60,7 +60,7 @@
                         >
                         </MaterialRender>
                       </template>
-                    </transition-group>
+                      </transition-group>
                   </draggable>
                 </el-col>
                 <div
@@ -94,7 +94,7 @@
               ></MaterialRender>
             </template>
           </template>
-        </div>
+          </transition-group>
       </draggable>
     </el-form>
   </div>
@@ -174,10 +174,12 @@ const handleWidgetAdd = (evt) => {
 
 const handleWidgetColAdd = ($event, row, colIndex) => {
   console.log('coladd', $event, row, colIndex);
+  row = toRaw(row);
   const newIndex = $event.newIndex;
   const oldIndex = $event.oldIndex;
   const item = $event.item;
 
+  console.log(row.columns[colIndex].list, '???')
   const key = new Date().getTime() + '_' + Math.ceil(Math.random() * 99999);
   row.columns[colIndex].list[newIndex] = {
     ...row.columns[colIndex].list[newIndex],
