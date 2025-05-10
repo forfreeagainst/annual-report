@@ -12,16 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import MakingFormContainer from '@/components/MakingFormContainer.vue';
-const temp = ref({
-  a: {
-    b:{
-      c: 33
-    }
-  }
-})
-console.log(temp.value.a);
-console.log(temp.value.a.b);
+import MakingFormContainer from './_components/MakingFormContainer.vue';
 </script>
 
 <style scoped></style>

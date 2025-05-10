@@ -55,7 +55,7 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
 
 <style lang="scss" scoped>
 .fm-header {
-  height: 50px;
+  height: var(--header-height);
   box-shadow: 0 2px 10px rgba(70, 160, 252, 0.6);
   padding: 0 10px;
   background-image: linear-gradient(to right, #1278f6, #00b4aa);
@@ -64,7 +64,7 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
   align-items: center;
 
   .fm-title {
-    line-height: 50px;
+    line-height: var(--header-height);
     color: #fff;
     font-size: 20px;
     font-weight: 600;
@@ -77,7 +77,7 @@ const locale = computed(() => (langEn.value === 'zh-cn' ? zhCn : en));
   }
 }
 .fm-container {
-  height: calc(100% - 50px);
+  height: calc(100% - var(--header-height));
   // background-color: skyblue;
 }
 *,
