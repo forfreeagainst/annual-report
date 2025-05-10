@@ -240,38 +240,6 @@ export const advanceComponents = [
     },
   },
   {
-    type: 'imgupload',
-    icon: 'icon-tupian',
-    options: {
-      defaultValue: [],
-      size: {
-        width: 100,
-        height: 100,
-      },
-      width: '',
-      tokenFunc: 'funcGetToken',
-      token: '',
-      domain: 'https://tcdn.form.making.link/',
-      disabled: false,
-      length: 8,
-      multiple: false,
-      isQiniu: false,
-      isDelete: false,
-      min: 0,
-      isEdit: false,
-      action: 'https://tools-server.making.link/api/transfer',
-    },
-  },
-  {
-    type: 'editor',
-    icon: 'icon-fuwenbenkuang',
-    options: {
-      defaultValue: '',
-      width: '',
-      disabled: false,
-    },
-  },
-  {
     type: 'cascader',
     icon: 'icon-jilianxuanze',
     options: {

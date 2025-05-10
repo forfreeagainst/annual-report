@@ -86,10 +86,7 @@
           :step="1"
         ></el-input-number>
       </el-form-item>
-      <el-form-item
-        :label="$t('fm.config.widget.multiple')"
-        v-if="data.type == 'select' || data.type == 'imgupload'"
-      >
+      <el-form-item :label="$t('fm.config.widget.multiple')" v-if="data.type == 'select'">
         <el-switch v-model="data.options.multiple" @change="handleSelectMuliple"></el-switch>
       </el-form-item>
       <el-form-item :label="$t('fm.config.widget.filterable')" v-if="data.type == 'select'">
@@ -374,28 +371,6 @@
           >
           </el-time-picker>
         </el-form-item>
-      </template>
-
-      <template v-if="data.type == 'imgupload'">
-        <el-form-item :label="$t('fm.config.widget.limit')">
-          <el-input type="number" v-model.number="data.options.length"></el-input>
-        </el-form-item>
-        <el-form-item :label="$t('fm.config.widget.isQiniu')">
-          <el-switch v-model="data.options.isQiniu"></el-switch>
-        </el-form-item>
-        <template v-if="data.options.isQiniu">
-          <el-form-item label="Domain" :required="true">
-            <el-input v-model="data.options.domain"></el-input>
-          </el-form-item>
-          <el-form-item :label="$t('fm.config.widget.tokenFunc')" :required="true">
-            <el-input v-model="data.options.tokenFunc"></el-input>
-          </el-form-item>
-        </template>
-        <template v-else>
-          <el-form-item :label="$t('fm.config.widget.imageAction')" :required="true">
-            <el-input v-model="data.options.action"></el-input>
-          </el-form-item>
-        </template>
       </template>
 
       <template v-if="data.type == 'blank'">

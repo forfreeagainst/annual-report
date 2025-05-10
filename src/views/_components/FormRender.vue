@@ -49,15 +49,16 @@
                   >
                     <transition-group name="fade" tag="div" class="widget-col-list">
                       <template v-for="(el, i) in col.list">
-                        <!-- {{ el }} -->ddd
-                        <!-- <widget-form-item                             
-                              :key="el.key"
-                              v-if="el.key"
-                              :element="el" 
-                              :select.sync="widgetFormSelect" 
-                              :index="i" 
-                              :data="col">
-                            </widget-form-item> -->
+                        <FormItemRender
+                          :key="el.key"
+                          v-if="el.key"
+                          :element="el"
+                          :row="index"
+                          :col="colIndex"
+                          :index="i"
+                          :data="col"
+                        >
+                        </FormItemRender>
                       </template>
                     </transition-group>
                   </draggable>
@@ -78,11 +79,14 @@
               </el-row>
             </template>
             <template v-else>
-              ccc
-              <!-- {{ element }} -->
-              <!-- <widget-form-item v-if="element && element.key"  :key="element.key" 
-              :element="element" :select.sync="widgetFormSelect" :index="index" :data="widgetForm">
-            </widget-form-item> -->
+              <FormItemRender
+                v-if="element && element.key"
+                :key="element.key"
+                :element="element"
+                :index="index"
+                :data="widgetForm"
+              >
+              </FormItemRender>
             </template>
           </template>
         </transition-group>
@@ -96,6 +100,7 @@
 import { VueDraggableNext as draggable } from 'vue-draggable-next';
 import { blocksRender } from '@/stores/blocksRender';
 import { storeToRefs } from 'pinia';
+import FormItemRender from './FormItemRender.vue';
 const useBlockRender = blocksRender();
 const { widgetForm, widgetFormSelect } = storeToRefs(useBlockRender);
 const { handleBlockAdd, handleSelectBlock, handleBlockColAdd, handleBlockDelete } = useBlockRender;
@@ -120,10 +125,10 @@ const handleWidgetColAdd = ($event, row, colIndex, index) => {
   console.log('coladd', $event, row, colIndex, $event.oldIndex, $event.item);
   handleBlockColAdd(row, colIndex, $event.newIndex, index);
 };
-const handleSelectWidget = (index) => {
+const handleSelectWidget = (index: number) => {
   handleSelectBlock(index);
 };
-const handleWidgetDelete = (index) => {
+const handleWidgetDelete = (index: number) => {
   handleBlockDelete(index);
 };
 </script>

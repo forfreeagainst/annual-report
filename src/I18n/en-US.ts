@@ -17,8 +17,6 @@ export default {
         text: 'Text',
         blank: 'Custom',
         fileupload: 'File',
-        imgupload: 'Image',
-        editor: 'Editor',
         cascader: 'Cascader',
         table: 'Sub-table',
         grid: 'Grid',

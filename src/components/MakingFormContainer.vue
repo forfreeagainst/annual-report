@@ -299,7 +299,7 @@ const props = defineProps({
   },
   advanceFields: {
     type: Array<string>,
-    default: () => ['blank', 'imgupload', 'editor', 'cascader'],
+    default: () => ['blank', 'editor', 'cascader'],
   },
   layoutFields: {
     type: Array<string>,

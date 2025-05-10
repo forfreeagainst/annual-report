@@ -160,20 +160,6 @@
       ></el-slider>
     </template>
 
-    <template v-if="element.type == 'imgupload'">
-      <!-- <fm-upload
-        v-model="element.options.defaultValue"
-        :disabled="element.options.disabled"
-        :style="{ width: element.options.width }"
-        :width="element.options.size.width"
-        :height="element.options.size.height"
-        token="xxx"
-        domain="xxx"
-      >
-      </fm-upload> -->
-      imgupload
-    </template>
-
     <template v-if="element.type == 'cascader'">
       <el-cascader
         v-model="element.options.defaultValue"
@@ -184,12 +170,6 @@
         :options="element.options.remoteOptions"
       >
       </el-cascader>
-    </template>
-
-    <template v-if="element.type == 'editor'">
-      <!-- <vue-editor v-model="element.options.defaultValue" :style="{ width: element.options.width }">
-      </vue-editor> -->
-      vue-editor
     </template>
 
     <template v-if="element.type == 'blank'">

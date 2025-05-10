@@ -17,8 +17,6 @@ export default {
         text: '文字',
         blank: '自定义区域',
         fileupload: '文件',
-        imgupload: '图片',
-        editor: '编辑器',
         cascader: '级联选择器',
         table: '子表单',
         grid: '栅格布局',

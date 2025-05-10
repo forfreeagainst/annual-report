@@ -74,7 +74,7 @@ export const blocksRender = defineStore('useBlocksRender', () => {
   const handleBlockColAdd = (row: any, colIndex: number, newIndex: number, index: number) => {
     const key = new Date().getTime() + '_' + Math.ceil(Math.random() * 99999);
 
-    widgetForm.value.list[index].columns.list[newIndex] = {
+    widgetForm.value.list[index].columns[colIndex].list[newIndex] = {
       ...row.columns[colIndex].list[newIndex],
       options: {
         ...row.columns[colIndex].list[newIndex].options,
@@ -109,15 +109,91 @@ export const blocksRender = defineStore('useBlocksRender', () => {
       if (index === 0) {
         widgetFormSelect.value = {};
       } else {
-        widgetFormSelect.value = this.data.list[index - 1];
+        widgetFormSelect.value = widgetForm.value.list[index - 1];
       }
     } else {
-      widgetFormSelect.value = this.data.list[index + 1];
+      widgetFormSelect.value = widgetForm.value.list[index + 1];
     }
     nextTick(() => {
       widgetForm.value.list.splice(index, 1);
     });
   };
+  // 跟handleSelectBlock有区别
+  const handleSelectFormItem = (index: number, obj: any) => {
+    if (obj.row) {
+      widgetFormSelect.value = widgetForm.value.list[obj.row].columns[obj.colIndex].list[index];
+    } else {
+      widgetFormSelect.value = widgetForm.value.list[index];
+    }
+  };
+  const handleFormItemDelete = (index: number, obj: any) => {
+    let data = null;
+    if (obj.row) {
+      data = widgetForm.value.list[obj.row].columns[obj.colIndex].list;
+    } else {
+      widgetForm.value.list;
+    }
+    if (data.length - 1 === index) {
+      if (index === 0) {
+        widgetFormSelect.value = {};
+      } else {
+        widgetFormSelect.value = data[index - 1];
+      }
+    } else {
+      widgetFormSelect.value = data[index + 1];
+    }
+
+    nextTick(() => {
+      if (obj.row) {
+        data = widgetForm.value.list[obj.row].columns[obj.colIndex].list.splict(index, 1);
+      } else {
+        widgetForm.value.list.splice(index, 1);
+      }
+    });
+  };
+  const handleFormItemClone = (index: number, obj: any) => {
+    const key = new Date().getTime() + '_' + Math.ceil(Math.random() * 99999);
+    let data = null;
+    if (obj.row) {
+      data = widgetForm.value.list[obj.row].columns[obj.colIndex].list;
+    } else {
+      widgetForm.value.list;
+    }
+
+    let cloneData = {
+      ...data.list[index],
+      options: {
+        ...data.list[index].options,
+        remoteFunc: 'func_' + key,
+      },
+      key,
+      model: data.list[index].type + '_' + key,
+      rules: data.list[index].rules || [],
+    };
+
+    if (
+      data.list[index].type === 'radio' ||
+      data.list[index].type === 'checkbox' ||
+      data.list[index].type === 'select'
+    ) {
+      cloneData = {
+        ...cloneData,
+        options: {
+          ...cloneData.options,
+          options: cloneData.options.options.map((item) => ({ ...item })),
+        },
+      };
+    }
+    if (obj.row) {
+      widgetForm.value.list[obj.row].columns[obj.colIndex].list.splice(index, 0, cloneData);
+    } else {
+      widgetForm.value.list.splice(index, 0, cloneData);
+    }
+    nextTick(() => {
+      widgetFormSelect.value = data.list[index + 1];
+    });
+  };
+
   return {
     widgetFormSelect,
     widgetForm,
@@ -126,5 +202,8 @@ export const blocksRender = defineStore('useBlocksRender', () => {
     handleSelectBlock,
     handleBlockColAdd,
     handleBlockDelete,
+    handleSelectFormItem,
+    handleFormItemDelete,
+    handleFormItemClone,
   };
 });

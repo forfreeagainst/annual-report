@@ -181,39 +181,6 @@
       ></el-slider>
     </template>
 
-    <template v-if="widget.type == 'imgupload'">
-      <fm-upload
-        v-model="dataModel"
-        :disabled="elementDisabled"
-        :style="{ width: widget.options.width }"
-        :width="widget.options.size.width"
-        :height="widget.options.size.height"
-        :token="widget.options.token"
-        :domain="widget.options.domain"
-        :multiple="widget.options.multiple"
-        :length="widget.options.length"
-        :is-qiniu="widget.options.isQiniu"
-        :is-delete="widget.options.isDelete"
-        :min="widget.options.min"
-        :is-edit="widget.options.isEdit"
-        :action="widget.options.action"
-      >
-      </fm-upload>
-    </template>
-
-    <template v-if="widget.type == 'editor'">
-      <vue-editor
-        v-model="dataModel"
-        :style="{
-          width: widget.options.width,
-          cursor: elementDisabled ? 'no-drop' : '',
-          backgroundColor: elementDisabled ? '#F5F7FA' : '',
-        }"
-        :disabled="elementDisabled"
-      >
-      </vue-editor>
-    </template>
-
     <template v-if="widget.type == 'cascader'">
       <el-cascader
         v-model="dataModel"
@@ -258,11 +225,6 @@ if (props.widget.options.remote && props.remote[props.widget.options.remoteFunc]
   });
 }
 
-if (props.widget.type === 'imgupload' && props.widget.options.isQiniu) {
-  props.remote[props.widget.options.tokenFunc]((data) => {
-    props.widget.options.token = data;
-  });
-}
 const emit = defineEmits(['update:models', 'input-change']);
 watch(
   dataModel.value,

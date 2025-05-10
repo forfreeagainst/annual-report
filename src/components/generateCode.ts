@@ -12,14 +12,6 @@ function findRemoteFunc(list, funcList, tokenFuncList, blankList) {
             label: list[i].name,
           });
         }
-      } else if (list[i].type == 'imgupload') {
-        if (list[i].options.tokenFunc) {
-          tokenFuncList.push({
-            func: list[i].options.tokenFunc,
-            label: list[i].name,
-            model: list[i].model,
-          });
-        }
       } else {
         if (list[i].options.remote && list[i].options.remoteFunc) {
           funcList.push({
