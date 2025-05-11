@@ -67,14 +67,16 @@
                   class="widget-view-action widget-col-action"
                   v-if="widgetFormSelect.key == element.key"
                 >
-                  <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
+                  <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)">
+                    Delete
+                  </i>
                 </div>
 
                 <div
                   class="widget-view-drag widget-col-drag"
                   v-if="widgetFormSelect.key == element.key"
                 >
-                  <i class="iconfont icon-drag drag-widget"></i>
+                  <i class="iconfont icon-drag drag-widget"> Drag </i>
                 </div>
               </el-row>
             </template>

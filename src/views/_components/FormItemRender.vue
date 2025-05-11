@@ -185,12 +185,12 @@
     </template>
 
     <div class="widget-view-action" v-if="widgetFormSelect.key == element.key">
-      <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"></i>
-      <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"></i>
+      <i class="iconfont icon-icon_clone" @click.stop="handleWidgetClone(index)"> Clone </i>
+      <i class="iconfont icon-trash" @click.stop="handleWidgetDelete(index)"> Delete </i>
     </div>
 
     <div class="widget-view-drag" v-if="widgetFormSelect.key == element.key">
-      <i class="iconfont icon-drag drag-widget"></i>
+      <i class="iconfont icon-drag drag-widget">Drag</i>
     </div>
   </el-form-item>
 </template>
